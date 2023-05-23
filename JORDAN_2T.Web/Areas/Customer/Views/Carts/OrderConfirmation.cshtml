@@ -1,0 +1,19 @@
+﻿@model JORDAN_2T.ApplicationCore.ViewModels.ShoppingCartVM
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="text-primary text-center">Order Placed Successfully!</h1>
+            <h5>Your Order Number: @Model.Order.Id<h5>
+        </div>
+        <div class="col-12 text-center my-2 important-text">
+            Please Check Your Orders History!
+        </div>
+        <div class="col-12 text-center ">
+							<a asp-controller="OrderHistory" asp-action="Index" class="btn btn-success form-control">Order History</a>
+						</div>
+        <div class="col-12 text-center">
+            <img src="~/images/order-completed.jpg" />
+        </div>
+    </div>
+</div>
+

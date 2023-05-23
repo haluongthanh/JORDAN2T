@@ -1,0 +1,67 @@
+@model JORDAN_2T.ApplicationCore.ViewModels.UserVM
+
+@{
+    ViewBag.Title = "All Users";
+    Pager pager = new Pager();
+    int pageNo=0;
+    if(ViewBag.Pager !=null){
+       pager=ViewBag.Pager;
+       pageNo=pager.CurrentPage;
+    }
+}
+
+
+ <form asp-controller="Users" asp-action="Index" method="get">
+                    <p>
+                        Search User Name: <input type="text" name="SearchString" />
+                        <input type="submit" value="Filter" />
+                    </p>
+                </form>
+    @foreach (var user in Model.users)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                User Id : @user.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@user.UserName</h5>
+                <h5 class="card-title">@user.DOB</h5>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Users" asp-action="EditUser" asp-route-Id="@user.Id" class="btn btn-danger">Edit</a>
+                @* <a href="#" class="btn btn-danger">Delete</a> *@
+            </div>
+        </div>
+    }
+    <div class="container"> 
+    @if(pager.TotalPages>0){
+        <ul class="pagination justify-content-end">
+            @if(pager.CurrentPage > 1){
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Users" asp-action="Index" asp-route-pg="1">First</a>
+                </li>
+                 <li class="page-item">
+                    <a class="page-link" asp-controller="Users" asp-action="Index" asp-route-pg="@(pager.CurrentPage - 1 )">Previous</a>
+                </li>
+            }
+
+            @for (var pge = pager.StartPage; pge <+ pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge==pager.CurrentPage ? "active": "")">
+                    <a class="page-link" asp-controller="Users" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                </li>
+            }
+            
+            @if(pager.CurrentPage<pager.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Users" asp-action="Index" asp-route-pg="@(pager.CurrentPage + 1)">Next</a>
+                </li>
+                 <li class="page-item">
+                    <a class="page-link" asp-controller="Users" asp-action="Index" asp-route-pg="@(pager.TotalPages)">last</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
