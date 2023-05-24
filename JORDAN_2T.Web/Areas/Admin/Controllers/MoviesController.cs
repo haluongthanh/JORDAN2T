@@ -17,7 +17,9 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
     /// Controller for administrative functions. Enable authorization on this controller to restrict who can modify website content.
     /// </summary>
     [Area("Admin")]
-    [Authorize(Roles = WebsiteRole.Admin)]
+    
+    
+    [Authorize(Roles = WebsiteRole.Managers)]
     public class MoviesController : BaseController
     {
         #region Constructors
@@ -83,8 +85,8 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
             MovieDetailsVM vm = new MovieDetailsVM(movie);
             vm.MovieStatusList = new SelectList(((MovieRepository)_uow.Movies).MovieStatusList, "Key", "Value", movie.Status);
 
-            vm.CategoryList = new SelectList(_uow.Categorys.GetAll(p => p.Id != null).ToList(), "Id", "Name");
-            vm.SubCategoryList = new SelectList(_uow.SubCategorys.GetAll(p => p.Id != null).ToList(), "Id", "Name");
+            vm.CategoryList = new SelectList(_uow.Categorys.GetCategories().ToList(), "Id", "Name");
+            vm.SubCategoryList = new SelectList(_uow.SubCategorys.GetSubCategories().ToList(), "Id", "Name");
             
             vm.ShowPhoto = isPhoto;
 
@@ -177,7 +179,7 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
            
             movie.Number=((MovieRepository)_uow.Movies).GetNumber(0);
             adminMovieListVM.Number=movie.Number;
-            adminMovieListVM.CategoryList = new SelectList(_uow.Categorys.GetAll(p => p.Id != null).ToList(), "Id", "Name");
+            adminMovieListVM.CategoryList = new SelectList(_uow.Categorys.GetCategories().ToList(), "Id", "Name");
             adminMovieListVM.StatusList = new SelectList(((MovieRepository)_uow.Movies).MovieStatusList, "Key", "Value", movie.Status);
             return View(adminMovieListVM);
         }
@@ -226,7 +228,7 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
       
         public List<SelectListItem> GetSubCategories(int categoryId = 1)
         {
-            List<SelectListItem> list = ((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null)
+            List<SelectListItem> list = ((SubCategoryRepository)_uow.SubCategorys).GetSubCategories()
                 .Where(c => c.CategoryId == categoryId)
                 .OrderBy(n => n.Name)
                 .Select(i => new SelectListItem

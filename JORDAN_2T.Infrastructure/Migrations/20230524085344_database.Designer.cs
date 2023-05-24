@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JORDAN_2T.Infrastructure.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20230518084017_database")]
+    [Migration("20230524085344_database")]
     partial class database
     {
         /// <inheritdoc />
@@ -106,6 +106,9 @@ namespace JORDAN_2T.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -302,6 +305,9 @@ namespace JORDAN_2T.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

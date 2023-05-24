@@ -12,11 +12,17 @@ namespace JORDAN_2T.ApplicationCore.Models;
         Active,
         Sold
     }
+
     public enum MovieSortKey
     {
         New,
         PriceLow,
         PriceHigh
+    }
+    public enum CategoryStatus
+    {
+        Draft,
+        Active
     }
     public class Movie
     {
@@ -61,6 +67,7 @@ public class Category
     
     public int Id {get;set;}
     public string? Name {get;set;}
+    public CategoryStatus Status { get; set; }
    
 }
 
@@ -74,6 +81,8 @@ public class SubCategory
     public string? Name{get;set;}
 
     public Category Category {get;set;}
+
+    public CategoryStatus Status { get; set; }
 
 }
 public class Pager{

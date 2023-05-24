@@ -11,6 +11,7 @@ namespace JORDAN_2T.Infrastructure.Interfaces
     {
         SubCategory CreateNewSubCategory();
         SubCategory GetSubCategory(int id);
-        IEnumerable<SubCategory> GetSubCategories(string SearchString,int pg);
+        IEnumerable<SubCategory> GetSubCategories();
+        IEnumerable<SubCategory> GetSubCategories(CategoryStatus status,string SearchString,int pg);
     }
 }

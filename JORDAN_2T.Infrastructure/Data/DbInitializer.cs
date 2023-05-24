@@ -39,26 +39,26 @@ namespace JORDAN_2T.Infrastructure.Data;
             {
             }
 
-            _context.Categories.AddRange(
-                new Category{
-                    Id=0,
-                    Name="New Category"
-                }
-            );
-            _context.SubCategories.AddRange(
-                new SubCategory{
-                    Id=0,
-                    CategoryId=1,
-                    Name="New Sub Category"
-                }
-            );
+            // _context.Categories.AddRange(
+            //     new Category{
+            //         Id=0,
+            //         Name="New Category"
+            //     }
+            // );
+            // _context.SubCategories.AddRange(
+            //     new SubCategory{
+            //         Id=0,
+            //         CategoryId=1,
+            //         Name="New Sub Category"
+            //     }
+            // );
             // Create roles if they are not created
             if (!_roleManager.RoleExistsAsync(WebsiteRole.Admin).GetAwaiter().GetResult())
             {
 
                 
                 _roleManager.CreateAsync(new IdentityRole(WebsiteRole.Admin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(WebsiteRole.Staff)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(WebsiteRole.Managers)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(WebsiteRole.Customer)).GetAwaiter().GetResult();
 
                 // If roles are not created, then we will create admin user as well
@@ -74,6 +74,7 @@ namespace JORDAN_2T.Infrastructure.Data;
                 ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@ltvaz.com");
  
                 _userManager.AddToRoleAsync(user, WebsiteRole.Admin).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(user, WebsiteRole.Managers).GetAwaiter().GetResult();
 
             }
                  

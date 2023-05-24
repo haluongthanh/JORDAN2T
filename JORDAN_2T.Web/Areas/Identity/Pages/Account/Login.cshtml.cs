@@ -114,8 +114,8 @@ namespace JORDAN_2T.Web.Areas.Identity.Pages.Account
             
             ReturnUrl = returnUrl;
             Input = new InputModel{
-                categories=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null),
-                subCategories=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null)
+                categories=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active),
+                subCategories=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active)
             };
         }
 

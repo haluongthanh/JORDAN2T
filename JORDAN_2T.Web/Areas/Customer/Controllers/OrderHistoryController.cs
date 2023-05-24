@@ -38,8 +38,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
              orderHistoryVM = new OrderHistoryVM()
             {
                 Order = _uow.Orders.GetAll(u => u.ApplicationUserId == claim.Value),
-                category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null),
-                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null),
+                category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active),
+                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active),
             };
             
            
@@ -50,8 +50,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
             orderHistoryVM= new OrderHistoryVM{ 
                 Order = _uow.Orders.GetAll(u => u.Id == id),
                 OrderDetails=_uow.OrderDetails.GetAll(p=>p.OrderId==id),
-                 category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null),
-                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null),
+                category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active),
+                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active),
             };
 
             foreach(var item in orderHistoryVM.OrderDetails){

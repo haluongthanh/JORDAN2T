@@ -22,7 +22,8 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
     /// Controller for administrative functions. Enable authorization on this controller to restrict who can modify website content.
     /// </summary>
     [Area("Admin")]
-    [Authorize(Roles = WebsiteRole.Admin)]
+    
+    [Authorize(Roles = WebsiteRole.Managers)]
     public class OrdersController : BaseController
     {
         #region Constructors

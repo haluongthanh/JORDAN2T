@@ -15,7 +15,8 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers.Controllers
     /// Resize images
     /// </summary>
     [Area("Admin")]
-    [Authorize(Roles = WebsiteRole.Admin)]
+    
+    [Authorize(Roles = WebsiteRole.Managers)]
     public class PhotoController : BaseController
     {
         private IWebHostEnvironment _env;

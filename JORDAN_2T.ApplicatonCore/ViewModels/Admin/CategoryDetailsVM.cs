@@ -13,6 +13,7 @@ namespace JORDAN_2T.ApplicationCore.ViewModels.Admin;
             category1 = category;
            
         }
+        public IEnumerable<SelectListItem> CategoryStatusList { get; set; }
         public int Id
         {
             get
@@ -25,6 +26,11 @@ namespace JORDAN_2T.ApplicationCore.ViewModels.Admin;
         {
             get { return category1.Name; }
             set { category1.Name = value; }
+        }
+        public CategoryStatus Status 
+        { 
+            get { return category1.Status; } 
+            set { category1.Status = value; } 
         }
 
     }

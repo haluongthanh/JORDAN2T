@@ -12,34 +12,33 @@ using JORDAN_2T.Web.Controllers;
 
 namespace JORDAN_2T.Web.Areas.Admin.Controllers{
     [Area("Admin")]
-    [Authorize(Roles = WebsiteRole.Admin)]
+    
+    [Authorize(Roles = WebsiteRole.Managers)]
+    
     public class CategoryController : BaseController
     {
         public CategoryController(IUnitOfWork uow) : base(uow)
         {
         }
 
-         public IActionResult Index(string SearchString="",int pg=1)
+        public IActionResult Index(CategoryStatus Status = CategoryStatus.Active,string SearchString="",int pg=1)
         {
            
-            CategoryVM vM= new CategoryVM();
-
+            
             const int pageSize=8;
             if(pg<1)
                 pg=1;
-                
-
             var querry =_uow.Orders.GetAll(p=>p.Id!=null);
             int recsCount =querry.Count();
-
             var pager=new Pager(recsCount,pg,pageSize);
-
             int recSkip=(pg-1)*pageSize;
-            
             this.ViewBag.pager=pager;
+            
+            CategoryVM vM= new CategoryVM();
             vM.search=SearchString;
-
-            vM.category=((CategoryRepository)_uow.Categorys).GetCategories(SearchString,pg);
+            vM.Statuslist = new SelectList(((CategoryRepository)_uow.Categorys).CategoryStatusList, "Key", "Value", Status);
+            vM.Status = Status;
+            vM.category=((CategoryRepository)_uow.Categorys).GetCategories(Status,SearchString,pg);
            
             return View(vM);
         }
@@ -62,6 +61,7 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers{
                 {
                     
                     category.Name = collection["Name"];
+                    category.Status=CategoryStatus.Draft;
                     _uow.Categorys.Add(category);
                     _uow.Save();
                    
@@ -83,7 +83,7 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers{
                 category = new Category();
             }
             CategoryDetailsVM vm = new CategoryDetailsVM(category);
-           
+            vm.CategoryStatusList = new SelectList(((CategoryRepository)_uow.Categorys).CategoryStatusList, "Key", "Value", category.Status);
             return View("Details", vm);
         }
 
@@ -92,14 +92,19 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers{
         public ActionResult Edit(int id, IFormCollection collection)
         {
             Category category = new Category();
-            
+            CategoryStatus initStatus;
+            CategoryStatus newStatus;
             try
             {
                 if (ModelState.IsValid)
                 {
                     category = ((CategoryRepository)_uow.Categorys).GetCategory(id);
+                    initStatus = category.Status;
                     category.Name = collection["Name"];
-                    
+                    if (Enum.TryParse<CategoryStatus>(collection["Status"], out newStatus))
+                    {
+                        category.Status = newStatus;
+                    }
                     _uow.Save();
                    
                     return RedirectToAction("Index");

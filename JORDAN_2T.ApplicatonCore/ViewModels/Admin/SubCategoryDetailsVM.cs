@@ -13,7 +13,7 @@ namespace JORDAN_2T.ApplicationCore.ViewModels.Admin;
             _subcategory = subCategory;
            
         }
-
+        public IEnumerable<SelectListItem> SubCategoryStatusList { get; set; }
         public IEnumerable<SelectListItem> ListCategory { get; set; }
         public IEnumerable<Category> categories{get;set;}
         public int Id
@@ -33,7 +33,9 @@ namespace JORDAN_2T.ApplicationCore.ViewModels.Admin;
             get { return _subcategory.Name; }
             set { _subcategory.Name = value; }
         }
-
-       
-
+         public CategoryStatus Status 
+        { 
+            get { return _subcategory.Status; } 
+            set { _subcategory.Status = value; } 
+        }
     }

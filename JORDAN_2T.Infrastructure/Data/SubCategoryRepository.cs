@@ -12,6 +12,11 @@ public class SubCategoryRepository : Repository<SubCategory>, ISubCategoryReposi
     public SubCategoryRepository(MvcMovieContext context) : base(context)
     {
         _context=context;
+        SubCategoryStatusList = new Dictionary<CategoryStatus, string>
+        {
+            {CategoryStatus.Active, "Active" },
+            {CategoryStatus.Draft, "Draft" },
+        };
     }
     public SubCategory CreateNewSubCategory()
     {
@@ -30,23 +35,31 @@ public class SubCategoryRepository : Repository<SubCategory>, ISubCategoryReposi
         return Subcategory;
     }
 
-    public IEnumerable<SubCategory> GetSubCategories(string SearchString,int pg)
-        {
-             IEnumerable<SubCategory> subCategories;
-            var subCategoriessList = _dbSet.Where(p => p.Id != null).Where(p=>p.Name.ToLower().Contains(SearchString));;
+    public IEnumerable<SubCategory> GetSubCategories(CategoryStatus status,string SearchString,int pg)
+    {
+            IEnumerable<SubCategory> subCategories;
+        var subCategoriessList = _dbSet.Where(p=>p.Status==status).Where(p => p.Id != null).Where(p=>p.Name.ToLower().Contains(SearchString));;
 
-            const int pageSize=8;
-            if(pg<1)
-                pg=1;
-                ;
+        const int pageSize=8;
+        if(pg<1)
+            pg=1;
+            ;
 
-            int recsCount =subCategoriessList.Count();
+        int recsCount =subCategoriessList.Count();
 
-            var pager=new Pager(recsCount,pg,pageSize);
+        var pager=new Pager(recsCount,pg,pageSize);
 
-            int recSkip=(pg-1)*pageSize;
-            subCategories= subCategoriessList.OrderByDescending(p => p.Id).Skip(recSkip).Take(pageSize).ToList();
-            return subCategories;
-        }
-
+        int recSkip=(pg-1)*pageSize;
+        subCategories= subCategoriessList.OrderByDescending(p => p.Id).Skip(recSkip).Take(pageSize).ToList();
+        return subCategories;
+    }
+    public IEnumerable<SubCategory> GetSubCategories(){
+         var subcategory = _dbSet.Where(p=>p.Status==CategoryStatus.Active);
+        return subcategory;
+    }
+    public Dictionary<CategoryStatus, string> SubCategoryStatusList
+    {
+        get;
+        private set;
+    }
 }

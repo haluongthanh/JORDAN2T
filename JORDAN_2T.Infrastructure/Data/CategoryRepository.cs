@@ -12,6 +12,11 @@ public class CategoryRepository : Repository<Category>, ICategoryRepository
     public CategoryRepository(MvcMovieContext context) : base(context)
     {
         _context=context;
+        CategoryStatusList = new Dictionary<CategoryStatus, string>
+        {
+            {CategoryStatus.Active, "Active" },
+            {CategoryStatus.Draft, "Draft" },
+        };
     }
 
     public Category CreateNewCategory()
@@ -30,24 +35,33 @@ public class CategoryRepository : Repository<Category>, ICategoryRepository
         return category;
     }
     
-     public IEnumerable<Category> GetCategories(string SearchString,int pg)
-        {
-             IEnumerable<Category> categories;
-            var CategoriessList = _dbSet.Where(p => p.Id != null).Where(p=>p.Name.ToLower().Contains(SearchString));;
+     public IEnumerable<Category> GetCategories(CategoryStatus status,string SearchString,int pg)
+    {
+        IEnumerable<Category> categories;
+        var CategoriessList = _dbSet.Where(p=>p.Status==status).Where(p => p.Id != null).Where(p=>p.Name.ToLower().Contains(SearchString));;
 
-            const int pageSize=8;
-            if(pg<1)
-                pg=1;
-                ;
+        const int pageSize=8;
+        if(pg<1)
+            pg=1;
+            ;
 
-            int recsCount =CategoriessList.Count();
+        int recsCount =CategoriessList.Count();
 
-            var pager=new Pager(recsCount,pg,pageSize);
+        var pager=new Pager(recsCount,pg,pageSize);
 
-            int recSkip=(pg-1)*pageSize;
+        int recSkip=(pg-1)*pageSize;
 
-            categories= CategoriessList.OrderByDescending(p => p.Id).Skip(recSkip).Take(pageSize).ToList();
-            
-            return categories;
-        }
+        categories= CategoriessList.OrderByDescending(p => p.Id).Skip(recSkip).Take(pageSize).ToList();
+        
+        return categories;
+    }
+    public IEnumerable<Category> GetCategories(){
+         var category = _dbSet.Where(p=>p.Status==CategoryStatus.Active);
+        return category;
+    }
+    public Dictionary<CategoryStatus, string> CategoryStatusList
+    {
+        get;
+        private set;
+    }
 }

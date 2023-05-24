@@ -19,8 +19,15 @@
                 <div class="col-6">
                     <a asp-controller="Category" asp-action="Create" class="btn btn-success mb-3 right">Create New</a>
                 </div>
+                <div class="col-6 d-flex">
+                    @using (Html.BeginForm("Index", "Category", FormMethod.Post, new { @class = "form-inline" }))
+                    {
+                        @Html.DropDownListFor(vm => vm.Status, Model.Statuslist, new { @class = "form-select mb-3", onchange = @"form.submit();" })
+                    }
+                </div>
                  <form asp-controller="Category" asp-action="Index" method="get">
                     <p>
+                         <input type="hidden" name="Status" value="@Model.Status">
                         Search Category Name: <input type="text" name="SearchString" />
                         <input type="submit" value="Filter" />
                     </p>
@@ -69,27 +76,27 @@
         <ul class="pagination justify-content-end">
             @if(pager.CurrentPage > 1){
                 <li class="page-item">
-                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-SearchString="@Model.search" asp-route-pg="1">First</a>
+                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-Status="@Model.Status" asp-route-SearchString="@Model.search" asp-route-pg="1">First</a>
                 </li>
                  <li class="page-item">
-                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-SearchString="@Model.search" asp-route-pg="@(pager.CurrentPage - 1 )">Previous</a>
+                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-Status="@Model.Status" asp-route-SearchString="@Model.search" asp-route-pg="@(pager.CurrentPage - 1 )">Previous</a>
                 </li>
             }
 
             @for (var pge = pager.StartPage; pge <+ pager.EndPage; pge++)
             {
                 <li class="page-item @(pge==pager.CurrentPage ? "active": "")">
-                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-SearchString="@Model.search" asp-route-pg="@pge">@pge</a>
+                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-Status="@Model.Status" asp-route-SearchString="@Model.search" asp-route-pg="@pge">@pge</a>
                 </li>
             }
             
             @if(pager.CurrentPage<pager.TotalPages)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-SearchString="@Model.search" asp-route-pg="@(pager.CurrentPage + 1)">Next</a>
+                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-Status="@Model.Status" asp-route-SearchString="@Model.search" asp-route-pg="@(pager.CurrentPage + 1)">Next</a>
                 </li>
                  <li class="page-item">
-                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-pg="@(pager.TotalPages)">last</a>
+                    <a class="page-link" asp-controller="Category" asp-action="Index" asp-route-Status="@Model.Status" asp-route-SearchString="@Model.search" asp-route-pg="@(pager.TotalPages)">last</a>
                 </li>
             }
         </ul>

@@ -46,8 +46,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
            
             vm.Movies = ((MovieRepository)_uow.Movies).GetInventoryMovies(sortBy);
 
-            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null);
-            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null);
+            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active);
+            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active);
 
             return View(vm);
         }
@@ -103,8 +103,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
             // var data =querry.Skip(recSkip).Take(pageSize).ToList();
             // vm.Movies=querry.Skip(recSkip).Take(pageSize).ToList();
 
-            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null);
-            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null);
+            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active);
+            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active);
 
         
 
@@ -137,8 +137,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
             vm.Movies = ((MovieRepository)_uow.Movies).GetCategory(Id,pg);
 
 
-            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null);
-            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null);
+             vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active);
+            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active);
             
             return View("Category",vm);
         }
@@ -167,8 +167,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
             vm.Movies = ((MovieRepository)_uow.Movies).GetSubCategory(Id,pg);
             
 
-            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null);
-            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null);
+             vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active);
+            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active);
             return View("SubCategory",vm);
         }
 
@@ -190,8 +190,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
             };
 
             CartItemDetailsVM cartItemDetails = new CartItemDetailsVM(cartObj);
-            cartItemDetails.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null);
-            cartItemDetails.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null);
+            cartItemDetails.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active);
+            cartItemDetails.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active);
             return View(cartItemDetails);
         }
 
@@ -242,8 +242,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
 
             vm.Movies=((MovieRepository)_uow.Movies).Search(search,pg);
 
-            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null);
-            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null);
+            vm.category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active);
+            vm.subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active);
             
             return View("Search",vm);
         }

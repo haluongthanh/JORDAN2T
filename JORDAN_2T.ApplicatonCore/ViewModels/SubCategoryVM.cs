@@ -15,4 +15,6 @@ public class SubCategoryVM
     public IEnumerable<SelectListItem> ListCategory { get; set; }
     public  IEnumerable<SubCategory> subcategory {get;set;}
     public IEnumerable<Category> categories {get;set;}
+    public IEnumerable<SelectListItem> Statuslist{get;set;}
+    public CategoryStatus Status { get; set; }
 }

@@ -11,6 +11,7 @@ namespace JORDAN_2T.Infrastructure.Interfaces
     {
         Category CreateNewCategory();
         Category GetCategory(int id);
-        IEnumerable<Category> GetCategories(string SearchString,int pg);
+        IEnumerable<Category> GetCategories();
+        IEnumerable<Category> GetCategories(CategoryStatus status,string SearchString,int pg);
     }
 }

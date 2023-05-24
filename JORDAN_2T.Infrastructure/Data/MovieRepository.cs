@@ -112,7 +112,9 @@ namespace JORDAN_2T.Infrastructure.Data
             var pager=new Pager(recsCount,pg,pageSize);
 
             int recSkip=(pg-1)*pageSize;
+            
             movies= movieList.OrderByDescending(p => p.Number).Skip(recSkip).Take(pageSize).ToList();
+
             return movies;
         }
         

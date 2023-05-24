@@ -20,16 +20,7 @@
             <i data-feather="user"
                     class="svg-icon mr-2 ml-1"></i>
                 My Profile</a>
-            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
-                    class="svg-icon mr-2 ml-1"></i>
-                My Balance</a>
-            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
-                    class="svg-icon mr-2 ml-1"></i>
-                Inbox</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
-                    class="svg-icon mr-2 ml-1"></i>
-                Account Setting</a>
+            
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="javascript:void(0)">
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -38,13 +29,7 @@
         </form>
                 </a>
             <div class="dropdown-divider"></div>
-            <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
-                    Profile</a>
-                    </div>
         </div>
-    </li>
-    <li class="nav-item">
-       
     </li>
 }
 else

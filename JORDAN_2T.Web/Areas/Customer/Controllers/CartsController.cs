@@ -41,8 +41,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
             CartVM = new ShoppingCartVM()
             {
                 CartList = _uow.ShoppingCarts.GetAll(u => u.ApplicationUserId == claim.Value, includeProperties: "Movie"),
-                category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null),
-                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null),
+                category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active),
+                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active),
                 Order = new Order()
             };
             foreach(var cart in CartVM.CartList)
@@ -70,8 +70,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
             CartVM = new ShoppingCartVM()
             {
                 CartList = _uow.ShoppingCarts.GetAll(u => u.ApplicationUserId == claim.Value, includeProperties: "Movie"),
-                 category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null),
-                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null),
+                category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active),
+                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active),
                 Order = new Order()
             };
             CartVM.Order.ApplicationUser = _uow.ApplicationUsers.GetFirstOrDefault(u => u.Id == claim.Value);
@@ -159,8 +159,8 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
                 Order=new Order{
                     Id=id
                 },
-                 category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null),
-                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Id!=null),
+                category=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Status==CategoryStatus.Active),
+                subCategory=((SubCategoryRepository)_uow.SubCategorys).GetAll(p=>p.Status==CategoryStatus.Active),
             };
             
             return View(shoppingCartVM);

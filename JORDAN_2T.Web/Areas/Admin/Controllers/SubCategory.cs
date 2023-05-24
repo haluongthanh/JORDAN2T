@@ -14,14 +14,15 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
 {
 
     [Area("Admin")]
-    [Authorize(Roles = WebsiteRole.Admin)]
+    
+    [Authorize(Roles = WebsiteRole.Managers)]
     public class SubCategoryController : BaseController
     {
         public SubCategoryController(IUnitOfWork uow) : base(uow)
         {
 
         }
-        public IActionResult Index(string SearchString="",int pg=1)
+        public IActionResult Index(CategoryStatus Status = CategoryStatus.Active,string SearchString="",int pg=1)
         {
              const int pageSize=8;
             if(pg<1)
@@ -38,10 +39,13 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
             this.ViewBag.pager=pager;
 
             SubCategoryVM vM= new SubCategoryVM();
+            
+            vM.Statuslist = new SelectList(((SubCategoryRepository)_uow.SubCategorys).SubCategoryStatusList, "Key", "Value", Status);
+            vM.Status = Status;
 
             vM.search=SearchString;
 
-            vM.subcategory=((SubCategoryRepository)_uow.SubCategorys).GetSubCategories(SearchString,pg);
+            vM.subcategory=((SubCategoryRepository)_uow.SubCategorys).GetSubCategories(Status,SearchString,pg);
             
            return View(vM);
         }
@@ -50,7 +54,7 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
         {
             SubCategoryVM subCategoryVM =new SubCategoryVM();
             
-            subCategoryVM.ListCategory=new SelectList(_uow.Categorys.GetAll(p=>p.Id!=null).ToList(),"Id","Name");
+            subCategoryVM.ListCategory=new SelectList(_uow.Categorys.GetCategories().ToList(),"Id","Name");
              
             return View(subCategoryVM);
 
@@ -68,6 +72,7 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
                 {
                     
                     Subcategory.Name = collection["Name"];
+                    Subcategory.Status=CategoryStatus.Active;
                     Subcategory.CategoryId=int.Parse(collection["CategoryId"]);
                     _uow.SubCategorys.Add(Subcategory);
                     _uow.Save();
@@ -91,7 +96,9 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
             }
             SubCategoryDetailsVm vm = new SubCategoryDetailsVm(Subcategory);
 
-            vm.ListCategory=new SelectList(_uow.Categorys.GetAll(p=>p.Id!=null).ToList(),"Id","Name");
+            vm.ListCategory=new SelectList(_uow.Categorys.GetCategories().ToList(),"Id","Name");
+            vm.SubCategoryStatusList = new SelectList(((SubCategoryRepository)_uow.SubCategorys).SubCategoryStatusList, "Key", "Value", Subcategory.Status);
+
             // vm.categories=((CategoryRepository)_uow.Categorys).GetAll(p=>p.Id!=null);
 
             return View("Details", vm);
@@ -102,15 +109,21 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
         public ActionResult Edit(int id, IFormCollection collection)
         {
             SubCategory Subcategory = new SubCategory();
-            
+             CategoryStatus initStatus;
+            CategoryStatus newStatus;
             try
             {
                 if (ModelState.IsValid)
                 {
                     Subcategory = ((SubCategoryRepository)_uow.SubCategorys).GetSubCategory(id);
+                    initStatus = Subcategory.Status;
+
                     Subcategory.Name = collection["Name"];
                     Subcategory.CategoryId=int.Parse(collection["CategoryId"]);
-                    
+                    if (Enum.TryParse<CategoryStatus>(collection["Status"], out newStatus))
+                    {
+                        Subcategory.Status = newStatus;
+                    }
                     _uow.Save();
                    
                     return RedirectToAction("Index");
