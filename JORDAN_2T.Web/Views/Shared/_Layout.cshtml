@@ -93,7 +93,7 @@
                     <div class="header-logo">
                         <div class="header-logo wrap-logo" >
 
-                            <a asp-controller="Home" asp-action="Index" itemprop="url" aria-label="Hệ thống phân phối Air Jordan chính hãng">
+                            <a  asp-area="Customer" asp-controller="Home" asp-action="Index" itemprop="url"  aria-label="Hệ thống phân phối Air Jordan chính hãng">
                                 <img itemprop="logo" width="60" height="60" src="//theme.hstatic.net/200000384421/1000955298/14/logo.png?v=20" alt="Hệ thống phân phối Air Jordan chính hãng" class="dt-width-auto logoimg">
                             </a>
 
@@ -158,7 +158,7 @@
                         <img src="//theme.hstatic.net/200000384421/1000955298/14/icon-close.png?v=20" alt="close">
                     </a>
                     <div class="search-box wpo-wrapper-search">
-                        <form method="post" asp-controller="Home" asp-action="Search" class="searchform-product ultimate-search">
+                        <form method="post" asp-area="Customer" asp-controller="Home" asp-action="Search" class="searchform-product ultimate-search">
                             <button type="submit" class="btn-search " id="btnSearchAuto-3" aria-label="Tìm kiếm">
                                 <i class="fal fa-search"></i>
                            </button>
@@ -390,7 +390,7 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-wrap te">
-                    <p> <a asp-controller="Home" asp-action="Index"> Jordan VietNam © 2021 Nike, Inc. All Rights Reserved
+                    <p>  <a asp-area="Customer" asp-controller="Home" asp-action="Index"> Jordan VietNam © 2021 Nike, Inc. All Rights Reserved
                 </a></p>
                 </div>
             </div>

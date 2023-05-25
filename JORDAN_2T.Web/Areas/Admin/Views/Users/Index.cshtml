@@ -11,28 +11,58 @@
 }
 
 
- <form asp-controller="Users" asp-action="Index" method="get">
+<form asp-controller="Users" asp-action="Index" method="get">
                     <p>
                         Search User Name: <input type="text" name="SearchString" />
                         <input type="submit" value="Filter" />
                     </p>
                 </form>
-    @foreach (var user in Model.users)
-    {
-        <div class="card mb-3">
-            <div class="card-header">
-                User Id : @user.Id
+
+
+<div class="container">
+        <section class="mt-5">
+            <header>
+                <h1 class="heading-line mb-5">Manage users</h1>
+            </header>
+        </section>
+        <section>
+            <div class="card">
+                <div class="card-block">
+                    <table class="table">
+                        <thead>
+                            <tr class="row m-2">
+                                <th class="d-inline-block col-md-3 col-3">Full Name</th>
+                                <th class="d-inline-block col-md-4 col-4 hidden-md-down">Email</th>
+                                <th class="d-inline-block col-md-3 col-3 hidden-md-down">DOB</th>
+                                <th class="d-inline-block col-md-2 col-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model.users)
+                            {
+                                <tr class="row m-2">
+                                    <td class="d-inline-block col-md-3 col-4">
+                                        @user.FullName
+                                    </td>
+                                    <td class="d-inline-block col-md-4 col-4 hidden-md-down">
+                                        @user.Email
+                                    </td>
+                                    <td class="d-inline-block col-md-3 col-3 hidden-md-down">
+                                        @user.DOB
+                                    </td>
+                                    <td class="d-inline-block col-md-2 col-2">
+                                        <a asp-controller="Users" asp-action="EditUser" asp-route-Id="@user.Id"
+                                            class="btn btn-danger">Edit</a>
+                                        <a href="#" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">@user.UserName</h5>
-                <h5 class="card-title">@user.DOB</h5>
-            </div>
-            <div class="card-footer">
-                <a asp-controller="Users" asp-action="EditUser" asp-route-Id="@user.Id" class="btn btn-danger">Edit</a>
-                @* <a href="#" class="btn btn-danger">Delete</a> *@
-            </div>
-        </div>
-    }
+        </section>
+    </div>
     <div class="container"> 
     @if(pager.TotalPages>0){
         <ul class="pagination justify-content-end">

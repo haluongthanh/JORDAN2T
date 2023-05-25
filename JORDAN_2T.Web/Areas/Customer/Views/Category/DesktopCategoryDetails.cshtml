@@ -15,20 +15,20 @@
             <nav class="main-nav">
                 <ul class="clearfix">
                     <li class="active dropdown">
-                        <a asp-controller="Home" asp-action="Index" title="Trang chủ">Trang chủ</a>
+                        <a asp-area="Customer"  asp-controller="Home" asp-action="Index" title="Trang chủ">Trang chủ</a>
                     </li>
                     @foreach (var item in Model.category)
                     {
                         <li class=" dropdown">
                         
-                            <a asp-controller="Home" asp-action="Category" asp-route-Id="@item.Id" title="@item.Name">@item.Name<i class="fal fa-chevron-down" aria-hidden="true"></i></a>
+                            <a asp-area="Customer" asp-controller="Home" asp-action="Category" asp-route-Id="@item.Id" title="@item.Name">@item.Name<i class="fal fa-chevron-down" aria-hidden="true"></i></a>
                             
                                     <ul class="sub_menu">
                                         @foreach (var items in Model.subCategory)
                                         {
                                             @if (items.CategoryId==item.Id){
                                                 <li class="">
-                                                    <a asp-controller="Home" asp-action="SubCategory" asp-route-Id="@items.Id" title="Air Jordans">@items.Name	<i class="fal fa-chevron-right" aria-hidden="true"></i></a>
+                                                    <a asp-area="Customer" asp-controller="Home" asp-action="SubCategory" asp-route-Id="@items.Id" title="Air Jordans">@items.Name	<i class="fal fa-chevron-right" aria-hidden="true"></i></a>
                                                 </li>
                                             }
                                         }
