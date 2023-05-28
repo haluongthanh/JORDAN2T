@@ -72,7 +72,7 @@ namespace JORDAN_2T.Web.Areas.Admin.Controllers
                 {
                     
                     Subcategory.Name = collection["Name"];
-                    Subcategory.Status=CategoryStatus.Active;
+                    Subcategory.Status=CategoryStatus.Draft;
                     Subcategory.CategoryId=int.Parse(collection["CategoryId"]);
                     _uow.SubCategorys.Add(Subcategory);
                     _uow.Save();

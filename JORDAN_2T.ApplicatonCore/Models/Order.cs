@@ -8,7 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JORDAN_2T.ApplicationCore.Models;
+public enum OrderStatus
+    {
+        Pending,
+        Approved,
+        Processing,
+        Shipped,
+        Cancelled,
+        Refunded
 
+    }
+    public enum PaymentStatus{
+        Pending,
+        Approved,
+        ApprovedForDelayedPayment,
+        Rejected
+    }
     public class Order
     {
         public int Id { get; set; }
@@ -30,7 +45,7 @@ namespace JORDAN_2T.ApplicationCore.Models;
         public DateTime OrderDate { get; set; }
          public DateTime PaymentDate { get; set; }
         public DateTime ShippingDate { get; set; }
-        public string? OrderStatus { get; set; }
-        public string? PaymentStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }
     }
 

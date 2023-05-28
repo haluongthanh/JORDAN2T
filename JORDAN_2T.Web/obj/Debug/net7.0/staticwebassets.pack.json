@@ -3201,6 +3201,14 @@
       "PackagePath": "staticwebassets\\uploads\\images\\products\\100\\100-03.jpg"
     },
     {
+      "Id": "D:\\CODE\\ASP.NET CORE PROJECT\\JORDAN_2T\\JORDAN_2T.Web\\wwwroot\\uploads\\images\\products\\100\\100-04.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\products\\100\\100-04.jpg"
+    },
+    {
+      "Id": "D:\\CODE\\ASP.NET CORE PROJECT\\JORDAN_2T\\JORDAN_2T.Web\\wwwroot\\uploads\\images\\products\\100\\100-05.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\products\\100\\100-05.jpg"
+    },
+    {
       "Id": "D:\\CODE\\ASP.NET CORE PROJECT\\JORDAN_2T\\JORDAN_2T.Web\\wwwroot\\uploads\\images\\products\\100\\thumb\\100-01.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\products\\100\\thumb\\100-01.jpg"
     },
@@ -3211,6 +3219,14 @@
     {
       "Id": "D:\\CODE\\ASP.NET CORE PROJECT\\JORDAN_2T\\JORDAN_2T.Web\\wwwroot\\uploads\\images\\products\\100\\thumb\\100-03.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\products\\100\\thumb\\100-03.jpg"
+    },
+    {
+      "Id": "D:\\CODE\\ASP.NET CORE PROJECT\\JORDAN_2T\\JORDAN_2T.Web\\wwwroot\\uploads\\images\\products\\100\\thumb\\100-04.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\products\\100\\thumb\\100-04.jpg"
+    },
+    {
+      "Id": "D:\\CODE\\ASP.NET CORE PROJECT\\JORDAN_2T\\JORDAN_2T.Web\\wwwroot\\uploads\\images\\products\\100\\thumb\\100-05.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\products\\100\\thumb\\100-05.jpg"
     },
     {
       "Id": "D:\\CODE\\ASP.NET CORE PROJECT\\JORDAN_2T\\JORDAN_2T.Web\\wwwroot\\uploads\\images\\products\\101\\101-01.jpg",

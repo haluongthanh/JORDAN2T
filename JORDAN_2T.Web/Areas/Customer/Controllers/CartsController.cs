@@ -145,7 +145,7 @@ namespace JORDAN_2T.Web.Areas.Customer.Controllers
         {
             Order order = _uow.Orders.GetFirstOrDefault(u => u.Id == id, includeProperties: "ApplicationUser");
 
-            _uow.Orders.UpdateStatus(id, OrderStatus.Approved, OrderStatus.ApprovedPayment);
+            _uow.Orders.UpdateStatus(id, OrderStatus.Approved, PaymentStatus.Approved);
             _uow.Save();
 
             //_emailSender.SendEmailAsync(order.ApplicationUser.Email, "New Order - Online Shop", "<p>New Order Created</p>");

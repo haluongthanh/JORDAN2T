@@ -23,7 +23,9 @@ namespace JORDAN_2T.ApplicationCore.ViewModels.Admin;
                 return (int)_subcategory.Id;
             }
         }
-        public int CategoryId{
+        public int CategoryId
+        {
+
             get {return (int)_subcategory.CategoryId;}
             set {_subcategory.CategoryId=value;}
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using JORDAN_2T.ApplicationCore.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace JORDAN_2T.ApplicationCore.ViewModels;
 
@@ -15,5 +16,7 @@ namespace JORDAN_2T.ApplicationCore.ViewModels;
         public IEnumerable<Category> category { get; set; }
         public  IEnumerable<SubCategory> subCategory {get;set;}
         public IEnumerable<Order> Order { get; set; }
+          public IEnumerable<SelectListItem> StatusList { get; set; }
+        public OrderStatus Status { get; set; }
     }
 
